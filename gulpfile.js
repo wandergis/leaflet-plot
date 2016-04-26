@@ -35,7 +35,6 @@ gulp.task('compact-js', function () {
        './src/wandergis/tool/PlotDraw.js',
        './src/wandergis/tool/PlotEdit.js'])
        .pipe(concat('leaflet-plot.min.js'))
-       // .pipe(uglify())
        .pipe(gulp.dest('./dist/'))
        .pipe(gulp.dest('./sample/'));
 });
@@ -48,13 +47,6 @@ gulp.task('compact-css', function(){
         .pipe(cssnano());
 });
 
-gulp.task('default', function () {
-    var jsWatch = gulp.watch('./src/**/*.js', ['compact-js']);
-    jsWatch.on('change', function (e) {
-        console.log('File ' + e.path + ' was ' + e.type + ', running compact js ...');
-    });
-    var cssWatch = gulp.watch('./src/*.css', ['compact-css']);
-    jsWatch.on('change', function (e) {
-        console.log('File ' + e.path + ' was ' + e.type + ', running compact css ...');
-    });
+gulp.task('default',['compact-js','compact-css'] ,function () {
+   console.log('ok');
 });
